@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form> 
+            <div >
+                <p:panel style="width:100%; "   >   
+                    <h2>Colobane-Online Login</h2>
+                    <h:panelGrid style="width:50%" styleClass="grid-form" columns="1" cellpadding="5" > 
+                        <p:outputLabel for="email" value="Votre adresse email" />
+                        <p:inputText styleClass="champ" id="email" value="#{connexion.email}" />
+                        <p:message for="email" />
+
+                        <p:outputLabel for="motDePasse"  value="Votre mot de passe" />
+                        <p:inputText type="password" styleClass="champ" id="motDePasse" value="#{connexion.motDePasse}" />
+                        <p:message for="motDePasse" />  
+                        <p:commandButton styleClass="btn" style="width:100%" id="submit" update="@form"
+                                         value="SE CONNECTER"
+                                         action="#{connexion.execute()}" ajax="false"  />
+                    </h:panelGrid>
+                    <p:messages/>
+                </p:panel>
+            </div> 
+        </h:form> 
+    </cc:implementation>
+</html>

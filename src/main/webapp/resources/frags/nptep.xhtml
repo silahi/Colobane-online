@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <f:view> 
+
+        <h:panelGrid styleClass="grid-form" columns="2" cellpadding="5" cellspacing="25"  >
+            <h:panelGroup>
+                <span class="ui-float-label">
+                    <p:inputText styleClass="champ" value="#{compte.personne.nom}" id="nom"/>   
+                    <p:outputLabel for="@previous" value="Nom" />
+                </span> 
+            </h:panelGroup>
+
+            <h:panelGroup> 
+                <span class="ui-float-label">
+                    <p:inputText styleClass="champ" value="#{compte.personne.prenom}" id="prenom"/>   
+                    <p:outputLabel for="@previous" value="Prénom" />
+                </span>
+            </h:panelGroup>
+
+            <h:panelGroup>
+                <span class="ui-float-label">
+                    <p:inputText styleClass="champ" value="#{compte.personne.telephone}" id="phone"/>   
+                    <p:outputLabel for="@previous" value="Numéro de téléphone" />
+                </span>
+            </h:panelGroup>
+
+            <h:panelGroup>
+                <span class="ui-float-label">
+                    <p:inputText styleClass="champ" value="#{compte.personne.email}" id="email"/>  
+                    <p:outputLabel for="@previous" value="Adresse email" />
+                </span> 
+            </h:panelGroup>
+
+            <h:panelGroup>
+                <span class="ui-float-label">
+                    <p:inputText type="password" styleClass="champ" value="#{compte.personne.mot_de_passe}" id="motDePasse"/>  
+                    <p:outputLabel for="@previous" value="Mot de passe" />
+                </span> 
+            </h:panelGroup>  
+
+            <h:panelGroup>
+                <span class="ui-float-label">
+                    <p:inputText rendered="#{adresseRender}"  styleClass="champ" value="#{compte.personne.adresse}" id="adresse"/>  
+                    <p:outputLabel  rendered="#{adresseRender}" for="@previous" value="Adresse pour le service de livraison" />
+                </span> 
+            </h:panelGroup>  
+        </h:panelGrid>    
+    </f:view>
+</html>
+

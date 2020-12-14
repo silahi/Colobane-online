@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:compos="http://xmlns.jcp.org/jsf/composite/compos">
+    <f:view>
+        <h:head>
+            <title>ADMIN</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="/resources/modele/modeleA.xhtml">
+                <ui:define name="titre">ADMIN</ui:define>
+                <ui:define name="menu">
+                    <ui:include src="/resources/frags/admin-menu.xhtml" /> 
+                </ui:define>  
+
+                <ui:define name="contenu">
+                    <div class="ui-g">
+                        <div class="ui-g-3">
+                            <compos:info titre="Vendeurs" message="#{tachesAdmin.vendeurs.size()}" icone="fa fa-user" />
+                        </div>
+                        <div class="ui-g-3">
+                            <compos:info titre="Acheteurs" message="#{tachesAdmin.acheteurs.size()}" icone="fa fa-user" />
+                        </div>
+                        <div class="ui-g-3">
+                            <compos:info titre="Commandes" message="#{commandes.commandes.size()}" icone="fa fa-tags" />
+                        </div>
+                        <div class="ui-g-3">
+                            <compos:info titre="Vendeurs Inactifs" message="#{tachesAdmin.vendeursInactives.size()}"  icone="fa fa-close"/>
+                        </div>
+                        <div class="ui-g-3">
+                            <compos:info titre="Articles" message="#{tacheVendeur.articles.size()}"  icone="fa fa-buysellads"/>
+                        </div>
+                        <div class="ui-g-3">
+                            <compos:info titre="Categories" message="0"  icone="fa fa-eye"/>
+                        </div>
+                        <div class="ui-g-3">
+                            <compos:info titre="Commission" message="0"  icone="fa fa-dollar"/>
+                        </div>
+                    </div>
+                </ui:define>  
+            </ui:composition>
+        </h:body>
+    </f:view> 
+</html>
+

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface> 
+        <cc:attribute name="acheteur" type="java.lang.Boolean" />
+        <cc:attribute name="vendeur" type="java.lang.Boolean" />
+        <cc:attribute name="admin" type="java.lang.Boolean" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:commandButton value="Créer votre compte" >
+            <c:if test="#{cc.attrs.acheteur}">
+                <f:ajax event="click" execute="@form" render="@form" listener="#{compte.creerCompteAcheteur()}" />
+            </c:if> 
+            <c:if test="#{cc.attrs.vendeur}">
+                <f:ajax event="click" execute="@form" render="@form" listener="#{compte.creerCompteVendeur()}" />
+            </c:if>
+            <c:if test="#{cc.attrs.admin}">
+                <f:ajax event="click" execute="@form" render="@form" listener="#{compte.modifierAdmin()}" />
+            </c:if> 
+        </p:commandButton>
+    </cc:implementation>
+</html>

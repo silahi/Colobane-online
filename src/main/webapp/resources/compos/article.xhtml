@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="toutAfficher" type="java.lang.Boolean" />
+        <cc:attribute name="afficherPanier" type="java.lang.Boolean" />
+        <cc:attribute name="afficherCategorie" type="java.lang.Boolean" />
+        <cc:attribute name="recherche" type="java.lang.Boolean" /> 
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>   
+        <div class="ui-g">   
+            <c:if test="#{cc.attrs.toutAfficher}"> 
+                <ui:repeat value="#{articles.articles}" var="article" > 
+                    <h:form styleClass="form1"> 
+                        <p:growl/>
+                        <div align="center" class="ui-g-3">  
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <f:facet name="header">
+                                    <h:graphicImage width="200" url="/LireImage?image=#{article.id}" />
+                                </f:facet>
+                                <h:outputText styleClass="info-article" value="#{article.nom}" />
+                                <h:outputText styleClass="info-article" value="#{article.prix}" />
+                                <f:facet name="footer" >                           
+                                    <p:commandButton update="@form" styleClass="ajout-panier-btn"   action="#{panier.ajouter(article)}"  
+                                                     value="Ajouter au panier" icon="fa fa-cart-plus" />
+                                </f:facet>
+                            </h:panelGrid>
+                        </div>
+                    </h:form> 
+                </ui:repeat> 
+            </c:if>  
+
+            <c:if test="#{cc.attrs.afficherPanier}"> 
+                <h:form>
+                    <c:if test="#{empty panier.mesArticles}">
+                        <h3><h:outputText value="Vous n'avez pas d'articles !" /></h3>
+                    </c:if>
+                    <p:growl/>
+                    <ui:repeat value="#{panier.mesArticles}" var="artpan" >  
+                        <div class="ui-g-3">
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <f:facet name="header">
+                                    <h:graphicImage width="200" url="/LireImage?image=#{artpan.id}" />
+                                </f:facet>
+                                <h:outputText styleClass="info-article" value="#{artpan.nom}" />
+                                <h:outputText styleClass="info-article" value="#{artpan.prix}" />
+                                <f:facet name="footer" >                           
+                                    <p:commandButton update="@form" action="#{panier.retirer(artpan)}" value="Retirer "
+                                                     icon="fa fa-cart-minus" />
+                                </f:facet>
+                            </h:panelGrid>
+                        </div> 
+                    </ui:repeat> 
+                </h:form> 
+            </c:if> 
+            <c:if test="#{cc.attrs.afficherCategorie}">
+                <ui:repeat value="#{categorie.articles}" var="artcat" >
+                    <h:form>
+                        <p:growl/>
+                        <div class="ui-g-3">
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <f:facet name="header">
+                                    <h:graphicImage width="300" url="/LireImage?image=#{artcat.id}" />
+                                </f:facet>
+                                <h:outputText styleClass="info-article" value="#{artcat.nom}" />
+                                <h:outputText styleClass="info-article" value="#{artcat.prix}" />
+                                <f:facet name="footer" >                           
+                                    <p:commandButton update="@form" styleClass="ajout-panier-btn"   action="#{panier.ajouter(artcat)}"  
+                                                     value="Ajouter au panier" icon="fa fa-cart-plus" />
+                                </f:facet>
+                            </h:panelGrid>
+                        </div>
+                    </h:form> 
+                </ui:repeat> 
+            </c:if>  
+            <c:if test="#{cc.attrs.recherche}">
+                <c:if test="#{empty chercher.articlesTrouves}">
+                    <h3>Aucun article trouvé ! </h3>
+                </c:if>
+                <ui:repeat value="#{chercher.articlesTrouves}" var="artfound" >
+                    <h:form>
+                        <p:growl/>
+                        <div class="ui-g-3">
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <f:facet name="header">
+                                    <h:graphicImage width="300" url="/LireImage?image=#{artfound.id}" />
+                                </f:facet>
+                                <h:outputText styleClass="info-article" value="#{artfound.nom}" />
+                                <h:outputText styleClass="info-article" value="#{artfound.prix}" />
+                                <f:facet name="footer" >                           
+                                    <p:commandButton update="@form" styleClass="ajout-panier-btn"   action="#{panier.ajouter(artfound)}"  
+                                                     value="Ajouter au panier" icon="fa fa-cart-plus" />
+                                </f:facet>
+                            </h:panelGrid>
+                        </div>
+                    </h:form> 
+                </ui:repeat> 
+            </c:if> 
+        </div> 
+    </cc:implementation>
+</html>

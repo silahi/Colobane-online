@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title><ui:insert name="titre"></ui:insert></title>
+        </h:head>
+        <h:outputStylesheet library="css" name="main.css" />
+        <h:body>   
+            <p:outputPanel>
+                <div class="ui-g header">  
+                    <div class="ui-g-12">
+                        <h:form>
+                            <h:panelGrid styleClass="grid-form" columns="2">
+                                <h:panelGroup >
+                                    <h:panelGrid  columns="3" cellspacing="3" cellpadding="5">
+                                        <h:panelGroup>
+                                            <h:commandLink action="#{service.homePage()}">
+                                                <h:graphicImage  width="100" library="images" name="colobane.png" />
+                                            </h:commandLink> 
+                                        </h:panelGroup>  
+                                        <h:panelGroup>
+                                               
+                                                <p:inputText  value="#{chercher.motCle}" style="font-size: 18px; border-radius: 5px ; width: 450px; padding: 8px; "
+                                                              styleClass="search,champ" placeholder="Chercher un produit ou une catégorie">
+                                                    
+                                                    <f:ajax event="blur" execute="@this"  />
+                                                </p:inputText> 
+                                                 
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <p:commandButton action="#{chercher.cherche()}" icon="fa fa-search" styleClass="btn rech" value="Rechercher"/>
+                                        </h:panelGroup>  
+                                    </h:panelGrid>
+                                </h:panelGroup> 
+                                <h:panelGroup>
+                                    <h:panelGrid columns="3" cellspacing="10" cellpadding="5" >
+                                        <p:menuButton rendered="#{!user.connected}" styleClass="custom" value="Créer votre compte" icon="fa fa-user-plus"> 
+                                            <p:menuitem value="Vendeur" url="/colobane/colobane/compte-vendeur.xhtml"  />
+                                            <p:menuitem value="Acheteur" url="/colobane/colobane/compte-acheteur.xhtml" /> 
+                                        </p:menuButton>   
+                                        <p:commandButton styleClass="btn" action="#{service.monPanier()}"  value="Panier" icon="fa fa-cart-plus" /> 
+                                        <p:commandButton rendered="#{!user.connected}" styleClass="btn" action="#{service.loginPage()}" value="Se connecter" icon="fa fa-user" /> 
+                                        <p:menuButton rendered="#{user.connected}" styleClass="custom" value="#{user.username}" icon="fa fa-user-plus"> 
+                                            <p:menuitem value="Se Déconnecter" action="#{service.logout()}"   /> 
+                                        </p:menuButton> 
+                                        <p:commandButton styleClass="btn" 
+                                                         action="#{user.homePage()}"
+                                                         rendered="#{user.connected}"
+                                                         value="#{user.fonction}" icon="fa fa-user" />  
+                                    </h:panelGrid>
+                                </h:panelGroup> 
+                            </h:panelGrid> 
+                        </h:form> 
+                    </div> 
+                </div> 
+                <div class="ui-g">
+                    <div class="ui-g-2">
+                        <ui:insert name="menu">
+                            <h:form>
+                                <p:menu styleClass="menu" model="#{menu.model}" />
+                            </h:form>
+                            <br/><br/><br/><br/>
+                            <ui:remove>
+                                <p:imageSwitch speed="1000" activeIndex="3" slideshowSpeed="300" effect="blindY" >
+                                    <ui:repeat value="#{articles.articles}" var="article">
+                                        <p:graphicImage width="200" url="/LireImage?image=#{article.id}" />
+                                    </ui:repeat>
+                                </p:imageSwitch>
+                            </ui:remove>
+                           
+                        </ui:insert>
+                    </div> 
+                    <div class="ui-g-10">
+                        <ui:insert name="contenu">
+                            Contenu
+                        </ui:insert>
+                    </div>
+                </div>
+            </p:outputPanel> 
+        </h:body>
+    </f:view> 
+</html>
+

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Colobane-Online</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <p:outputPanel>
+                    <div class="ui-g" >
+                        <div class="ui-g-2">
+                            <h:commandLink action="#{infoSession.homePage()}" >
+                                <h:graphicImage width="100" library="images" name="colobane.png" />
+                            </h:commandLink> 
+                        </div>
+                        
+                        <div class="ui-g-10">
+                            <h:form>
+                                <h:panelGrid  columns="5" cellpadding="5">
+                                    <p:inputText placeholder="chercher un produit, une marque ou une catégorie" style="width:400px" />
+                                    <p:commandButton icon="fa fa-search" value="Rechercher"/>                                     
+
+                                    <p:commandButton value="#{infoSession.messageButton}" action="#{espUse.loginPage()}" icon="fa fa-user" />
+
+                                    <p:menuButton value="Créer un compte" icon="fa fa-user-plus"  > 
+                                        <p:menuitem value="Vendeur"  url="/colobane/faces/creerCompteVendeur.xhtml" />
+                                        <p:menuitem value="Acheteur" url="/colobane/faces/creerCompteAcheteur.xhtml" />
+                                        <p:menuitem value="Aministrateur" url="/colobane/faces/creerCompteAdmin.xhtml" />
+                                    </p:menuButton>  
+                                    <p:commandButton rendered="#{infoSession.renderRole}" value="#{infoSession.fonction}" />
+                                    <p:commandButton value="Panier" icon="fa fa-cart-plus" />
+                                    <p:commandButton value="Déconnexion" rendered="#{infoSession.renderRole}" action="#{infoSession.logout()}" />
+                                </h:panelGrid> 
+                            </h:form>          
+                        </div> 
+                    </div>
+                </p:outputPanel> 
+            </ui:insert>
+        </div>
+
+        <div>
+            <p:outputPanel>
+                <div class="ui-g">
+                    <div class="ui-g-2">
+                        <div id="left">
+                            <ui:insert name="left"> 
+                                left
+                            </ui:insert>
+                        </div>  
+                    </div>
+                    <div class="ui-g-10">
+                        <div id="content" >
+                            <ui:insert name="content">Content</ui:insert>
+                        </div> 
+                    </div>
+                </div>
+            </p:outputPanel>  
+        </div> 
+
+    </h:body>
+
+</html>
